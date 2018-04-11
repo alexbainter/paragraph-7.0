@@ -21,20 +21,26 @@ const potentialNotes = [
   return notesWithOctaves.concat(noteWithOctaves);
 }, []);
 
+const getRandomNote = () =>
+  potentialNotes[Math.floor(Math.random() * potentialNotes.length)];
+
 const playRandomNote = synth => {
-  const note =
-    potentialNotes[Math.floor(Math.random() * potentialNotes.length)];
+  const note = getRandomNote();
+  playNote(synth, note);
+};
+
+const playNote = (synth, note) => {
   synth.triggerAttackRelease(note, '8n');
 };
 
-const numberOfSingers = 3;
+const numberOfSingers = 0;
 
 for (let i = 1; i <= numberOfSingers; i++) {
   const synth = new Tone.Synth().toMaster();
-
+  const note = getRandomNote();
   setInterval(() => {
-    playRandomNote(synth);
-  }, Math.random() * 10000);
+    playRandomNote(synth, note);
+  }, Math.random() * 1000);
 }
 
 //synth.triggerAttackRelease(potentialNotes, '8n');
