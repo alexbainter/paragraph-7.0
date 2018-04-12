@@ -1,15 +1,21 @@
 import Tone from "tone";
-import addSinger from "./add-singer";
+import getSinger from "./get-singer";
+import getChorus from "./get-chorus";
 
 Tone.context.latencyHint = "playback";
 
+const numSingers = 5;
+
+const singerPromises = [];
 const singers = [];
 
-const numSingers = 10;
-
 for (let i = 1; i <= numSingers; i++) {
-  const singer = addSinger(singers);
-  singer.schedulePiece();
+  singerPromises.push(getSinger(singers).then(singer => singers.push(singer)));
 }
 
-Tone.Transport.start("+0.5");
+Promise.all(singerPromises).then(() => {
+  console.log("scheduling piece");
+  singers.forEach(singer => singer.schedulePiece());
+  console.log("starting piece");
+  Tone.Transport.start("+0.1");
+});
