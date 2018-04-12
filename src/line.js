@@ -1,10 +1,10 @@
 const line = (
   numberOfSyllables,
-  numberOfRepititons,
+  numberOfRepetitions,
   numberOfLoudRepitions = 0
 ) => ({
   numberOfSyllables,
-  numberOfRepititons,
+  numberOfRepetitions,
   numberOfLoudRepitions,
 });
 
