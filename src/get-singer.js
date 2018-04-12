@@ -1,10 +1,18 @@
-import Tone from "tone";
-import piece from "./piece";
-import notes from "./notes";
-import getChorus from "./get-chorus";
+import Tone from 'tone';
+import piece from './piece';
+import notes from './notes';
+import getChorus from './get-chorus';
+
+const SAMPLE_LENGTH_MS = 8000;
 
 const getRandomNote = potentialNotes =>
   potentialNotes[Math.floor(Math.random() * potentialNotes.length)];
+
+const makeGetRandomWaitTime = (min, max) => () =>
+  Math.random() * (max - min) + min;
+
+const getRandomWaitTimeBetweenLines = makeGetRandomWaitTime(100, 20000);
+const getRandomWaitTimeBetweenRepititions = makeGetRandomWaitTime(200, 800);
 
 const singer = (singers, instrument) => {
   let currentNote;
@@ -35,23 +43,23 @@ const singer = (singers, instrument) => {
     const note = getNextNote();
     let totalBreathTime = 0;
     for (let i = 1; i <= line.numberOfRepetitions; i++) {
+      const wait = getRandomWaitTimeBetweenRepititions();
       Tone.Transport.schedule(() => {
         singNote(note, length);
-      }, totalBreathTime / 1000);
-      totalBreathTime += 9000;
+      }, Tone.now() + totalBreathTime / 1000);
+      totalBreathTime += SAMPLE_LENGTH_MS + wait;
     }
   };
 
   const schedulePiece = () => {
     let totalBreathTime = 0;
     piece.forEach(line => {
-      const wait = Math.random() * (10000 - 1000) + 1000;
-      console.log(`Scheduling line for ${totalBreathTime / 1000}`);
+      const wait = getRandomWaitTimeBetweenLines();
       Tone.Transport.schedule(() => {
-        console.log("singing line");
-        singLine(line, 9000);
-      }, totalBreathTime / 1000);
-      totalBreathTime += 9000 * line.numberOfRepetitions + wait;
+        console.log('singing line');
+        singLine(line, SAMPLE_LENGTH_MS);
+      }, Tone.now() + totalBreathTime / 1000);
+      totalBreathTime += SAMPLE_LENGTH_MS * line.numberOfRepetitions + wait;
     });
   };
 

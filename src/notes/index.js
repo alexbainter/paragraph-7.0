@@ -1,6 +1,6 @@
-import male from "./male";
-import female from "./female";
+import male from './male';
+import female from './female';
 
-const allNotes = Object.keys(male).concat(Object.keys(female));
+const allNotes = male.concat(female);
 
 export default allNotes;
