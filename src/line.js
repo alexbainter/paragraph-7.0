@@ -1,9 +1,4 @@
-const line = (
-  numberOfSyllables,
-  numberOfRepetitions,
-  numberOfLoudRepitions = 0
-) => ({
-  numberOfSyllables,
+const line = (numberOfRepetitions, numberOfLoudRepitions = 0) => ({
   numberOfRepetitions,
   numberOfLoudRepitions,
 });
