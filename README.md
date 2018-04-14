@@ -20,7 +20,7 @@ For subsequent lines, vocalists select a new note which meets the following crit
 1.  It must not be the same note used to sing the previous line.
 1.  It must be a note currently being sung by another vocalist. If there is no such note, choose any note.
 
-Each vocalist progresses through the piece at their own pace and is free to pause between lines.
+Each vocalist progresses through the piece at his or her own pace and is free to pause between lines.
 
 Due to the random nature of the instructions, no two performances are exactly the same.
 Performances of the piece can be viewed [here](https://www.youtube.com/watch?v=9fO_HbjkZrA) and [here](https://www.youtube.com/watch?v=_GdfAZqsRiw).

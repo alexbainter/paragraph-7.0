@@ -4,7 +4,7 @@ import getChorus from './get-chorus';
 
 Tone.context.latencyHint = 'playback';
 
-const numSingers = 8;
+const numSingers = 20;
 
 const singerPromises = [];
 const singers = [];

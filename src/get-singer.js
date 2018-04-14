@@ -25,6 +25,7 @@ const singer = (singers, instrument) => {
     let possibleNextNotes = notes.filter(
       note => notesBeingSung.includes(note) && note !== currentNote
     );
+    console.log(notesBeingSung);
     if (possibleNextNotes.length === 0) {
       possibleNextNotes = notes.filter(note => note !== currentNote);
     }
@@ -40,6 +41,9 @@ const singer = (singers, instrument) => {
     }
     console.log(`Loud? ${loud}`);
     instrument.set({ volume });
+    // Tone.Transport.schedule(() => {
+    //   currentNote = undefined;
+    // }, Tone.now() + length / 1000);
     instrument.triggerAttackRelease(note, length / 1000);
   };
 
